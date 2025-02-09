@@ -1,0 +1,4 @@
+folium==0.19.4
+geographiclib==2.0
+opencv-python==4.11.0.86
+ultralytics==8.3.73

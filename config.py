@@ -1,0 +1,13 @@
+dataset_file_path = "C:/Users/admin/work/car-tracking/dataset/data.yaml"
+model_file_path = "./model.pt"
+metrics_file_path = "./metrics.srt"
+video_file_path = "./video.mp4"
+map_file_path = "./map.html"
+device = 0
+original_image_width = 1920
+original_image_height = 1080
+train_image_size = 640
+track_confidence = 0.5
+sensor_width = 6.4
+sensor_height = 4.8
+focal_length = 24.00
