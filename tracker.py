@@ -30,7 +30,7 @@ frame_num = 0
 while cap.isOpened():
     success, frame = cap.read()
     if success:
-        results = model.track(frame, device=device, imgsz=train_image_size, conf=track_confidence)
+        results = model.track(frame, persist=True, device=device, imgsz=train_image_size, conf=track_confidence)
         if results[0].boxes.id is not None:
             boxes = results[0].boxes.xywh.cpu().numpy().astype(int)
             track_ids = results[0].boxes.id.cpu().numpy().astype(int)
