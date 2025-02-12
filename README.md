@@ -10,4 +10,6 @@ pip install -r requirements.txt
 python tracker.py
 ```
 
-Output: https://grigoriy-romanenko.github.io/car-tracking/
+Object tracking visualization: https://drive.google.com/file/d/1q3cePD2ug8d9P3gYz0Zw5VheIsceU0VW/view
+
+Output (map): https://grigoriy-romanenko.github.io/car-tracking/
