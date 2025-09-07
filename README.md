@@ -1,4 +1,4 @@
-Objective: Track moving cars from a video file ([video.mp4](https://drive.google.com/file/d/1lvqkeE9NOJBvUn8079WvrNQ9nOoVXLVT/view), metrics.srt) and plot their paths on a map.
+Objective: Track moving cars from a video file ([video.mp4](https://drive.google.com/file/d/1lvqkeE9NOJBvUn8079WvrNQ9nOoVXLVT/view), [metrics.srt](https://github.com/grigoriy-romanenko/car-tracking/blob/master/metrics.srt)) and plot their paths on a map.
 
 Steps:
 * Analyze the video to detect and track moving cars.

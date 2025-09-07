@@ -2,6 +2,7 @@ import math
 import config
 import random
 import folium
+import numpy as np
 from math import atan2, degrees, radians
 from geographiclib.geodesic import Geodesic
 
@@ -28,13 +29,24 @@ def get_location(detection, metrics):
     location = Geodesic.WGS84.Direct(metrics.latitude, metrics.longitude, azimuth, distance)
     return location['lat2'], location['lon2']
 
+def moving_average(coordinates, window_size):
+    longitudes = np.array([])
+    latitudes = np.array([])
+    for i in range(len(coordinates)):
+        longitudes = np.append(longitudes, coordinates[i][1])
+        latitudes = np.append(latitudes, coordinates[i][0])
+    longitudes = np.convolve(longitudes, np.ones(window_size), 'valid') / window_size
+    latitudes = np.convolve(latitudes, np.ones(window_size), 'valid') / window_size
+    return [(latitudes[i], longitudes[i]) for i in range(len(longitudes))]
+
 def make_map(metrics, tracks):
     m = folium.Map(location=(metrics[0].latitude, metrics[0].longitude), zoom_start=15)
-    track_coordinates = list(map(lambda x: (x.latitude, x.longitude), metrics))
-    folium.PolyLine(track_coordinates, tooltip="drone").add_to(m)
+    drone_coordinates = list(map(lambda x: (x.latitude, x.longitude), metrics))
+    folium.PolyLine(drone_coordinates, tooltip="drone").add_to(m)
     rand = lambda: random.randint(0,255)
     for track_id, track in tracks.items():
-        track_coordinates = list(map(lambda detection: get_location(detection, metrics[detection.frame_num]), track))
+        car_coordinates = list(map(lambda detection: get_location(detection, metrics[detection.frame_num]), track))
+        car_coordinates = moving_average(car_coordinates, window_size=3)
         color = "#%02x%02x%02x" % (rand(), rand(), rand())
-        folium.PolyLine(track_coordinates, tooltip=f"car-{track_id}", color=color).add_to(m)
+        folium.PolyLine(car_coordinates, tooltip=f"car-{track_id}", color=color).add_to(m)
     m.save(config.map_file_path)

@@ -1,4 +1,4 @@
-dataset_file_path = "C:/Users/admin/work/car-tracking/dataset/data.yaml"
+dataset_file_path = "./dataset/data.yaml"
 model_file_path = "./model.pt"
 metrics_file_path = "./metrics.srt"
 video_file_path = "./video.mp4"
